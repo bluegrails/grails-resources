@@ -1,63 +1,70 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>nz.ac.auckland.grails</groupId>
-        <artifactId>uoa-grails2-parent</artifactId>
-        <version>1.6</version>
-    </parent>
+  <parent>
+    <groupId>nz.ac.auckland.grails</groupId>
+    <artifactId>uoa-grails2-parent</artifactId>
+    <version>1.6</version>
+  </parent>
 
-	<groupId>nz.ac.auckland.grails.plugins</groupId>
-	<artifactId>resources</artifactId>
-	<packaging>grails-plugin</packaging>
-	<version>2.2-SNAPSHOT</version>
-	<name>Reflects grails-resources plugin</name>
-	<description>Grails resources plugin but with Maven bundling</description>
-	<url>http://grails.org/plugin/resources</url>
-	<developers>
-		<developer>
-			<name>Marc Palmer</name>
-		</developer>
-	</developers>
+  <groupId>nz.ac.auckland.grails.plugins</groupId>
+  <artifactId>resources</artifactId>
+  <packaging>grails-plugin</packaging>
+  <version>2.2-SNAPSHOT</version>
+  <name>Reflects grails-resources plugin</name>
+  <description>Grails resources plugin but with Maven bundling</description>
+  <url>http://grails.org/plugin/resources</url>
+  <developers>
+    <developer>
+      <name>Marc Palmer</name>
+    </developer>
+  </developers>
 
   <properties>
     <grails.version>2.0.3</grails.version>
   </properties>
 
-<dependencies>
+  <dependencies>
 
-        <!-- this provides us with grails (without having to have grails) -->
-        <dependency>
-            <groupId>nz.ac.auckland.composite</groupId>
-            <artifactId>composite-grails</artifactId>
-            <version>[2,3)</version>
-						<scope>provided</scope>
-        </dependency>
-				<dependency>
-						<groupId>org.grails.plugins</groupId>
-						<artifactId>spock</artifactId>
-						<version>0.6</version>
-						<type>grails-plugin</type>
-						<scope>test</scope>
-				</dependency>
-				<dependency>
-						<groupId>org.spockframework</groupId>
-						<artifactId>spock-grails-support</artifactId>
-						<version>0.6-groovy-1.8</version>
-						<scope>test</scope>
-				</dependency>
-</dependencies>
-	
-	<!-- without the plugin, it doesn't know how to cope with the grails-plugin artifact -->
-	<!-- if we do this in >1 of these composites, we need to pull this into a new parent (grails-composite-parent) -->
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>com.bluetrainsoftware.bluegrails</groupId>
-				<artifactId>grails-maven-plugin</artifactId>
-				<version>1.12</version>
-			</plugin>
-		</plugins>
-	</build>
+    <!-- this provides us with grails (without having to have grails) -->
+    <dependency>
+      <groupId>nz.ac.auckland.composite</groupId>
+      <artifactId>composite-grails</artifactId>
+      <version>[2,3)</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.grails.plugins</groupId>
+      <artifactId>spock</artifactId>
+      <version>0.6</version>
+      <type>grails-plugin</type>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.spockframework</groupId>
+      <artifactId>spock-grails-support</artifactId>
+      <version>0.6-groovy-1.8</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.grails</groupId>
+      <artifactId>grails-plugin-testing</artifactId>
+      <version>[${grails.version}]</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <!-- without the plugin, it doesn't know how to cope with the grails-plugin artifact -->
+  <!-- if we do this in >1 of these composites, we need to pull this into a new parent (grails-composite-parent) -->
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.bluetrainsoftware.bluegrails</groupId>
+        <artifactId>grails-maven-plugin</artifactId>
+        <version>1.12</version>
+      </plugin>
+    </plugins>
+  </build>
 </project>
