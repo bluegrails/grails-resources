@@ -866,6 +866,12 @@ class ResourceProcessor implements InitializingBean {
 /* @todo add this later when we understand what less-css-resources needs
         // Now do the derived synthetic resources as we know any changed components
         // have now been reset
+        
+        // LESS mapper would make synthetic resources too, and these might also delegate
+        // to a bundled resource, but all need processing in the correct order
+        // and LESS would need to compile the stuff to a file in beginPrepare
+        // before the bundle aggregates the output. 
+        // Question is, what is the correct ordering here?
         collectResourcesThatNeedProcessing(modulesByName[SYNTHETIC_MODULE], resBatch)
     */
         resourcesChanged(resBatch)
@@ -953,6 +959,8 @@ class ResourceProcessor implements InitializingBean {
         }
         updateDependencyOrder()
         def s4 = "Dependency load order: ${modulesInDependencyOrder}\n"
+
+        def s5 = "Mapper application order: ${resourceMappers*.name}\n"
         
         if (toLog) {
             log.debug '-'*50
@@ -967,8 +975,10 @@ class ResourceProcessor implements InitializingBean {
             log.debug '-'*50
             log.debug(s4)
             log.debug '-'*50
+            log.debug(s5)
+            log.debug '-'*50
         } 
-        return s1.toString() + s2.toString() + s4.toString()
+        return s1.toString() + s2.toString() + s4.toString() + s5.toString()
     }
     
     /**
@@ -1035,6 +1045,7 @@ class ResourceProcessor implements InitializingBean {
             loadResources(reloadBatch)
             
             dumpStats()
+            log.info("Finished resource mapper reload")
         } finally {
             reloading = false
         }
@@ -1052,6 +1063,7 @@ class ResourceProcessor implements InitializingBean {
             loadModules(reloadBatch)
             
             dumpStats()
+            log.info("Finished module definition reload")
         } finally {
             reloading = false
         }
@@ -1069,6 +1081,7 @@ class ResourceProcessor implements InitializingBean {
             loadResources(reloadBatch)
             
             dumpStats()
+            log.info("Finished changed file reload")
         } finally {
             reloading = false
         }
@@ -1088,6 +1101,7 @@ class ResourceProcessor implements InitializingBean {
             loadModules(reloadBatch)
             
             dumpStats()
+            log.info("Finished full reload")
         } finally {
             reloading = false
         }

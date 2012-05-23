@@ -21,19 +21,16 @@ class BundleResourceMapper {
     static MIMETYPE_TO_RESOURCE_META_CLASS = [
         'text/css': CSSBundleResourceMeta,
         'text/javascript': JavaScriptBundleResourceMeta,
-        'application/x-javascript': JavaScriptBundleResourceMeta, // Jetty default .js mapping
-        'application/javascript': JavaScriptBundleResourceMeta
+        'application/javascript': JavaScriptBundleResourceMeta,
+        'application/x-javascript': JavaScriptBundleResourceMeta
     ]
     
     /**
-     * Find resources that belong in bundles, and create the bundles, and make the resource delegate to the bundle
-     * Create a new aggregated resource for the bundle and shove all the resourceMetas into it.
+     * Find resources that belong in bundles, and create the bundles, and make the resource delegate to the bundle.
+     * Creates a new aggregated resource for the bundle and shoves all the resourceMetas into it.
      * We rely on the smart linking stuff to avoid writing out the same bundle multiple times, so you still have
      * dependencies to the individual resources but these delegate to the aggregated resource, and hence all such
      * resources will return the same link url, and not be included more than once.
-     *
-     * I'm not sure this is the best way, but it means we don't need to mess with existing module and resource definitions
-     * which would undoubtedly cause us all kinds of pain.
      */
     def map(resource, config) {
         def bundleId = resource.bundle
@@ -48,7 +45,7 @@ class BundleResourceMapper {
             // Find/create bundle for this extension type
             def bundlename = "bundle-$bundleId.${resource.sourceUrlExtension}"
             def bundleURI = "/${bundlename}"
-            
+
             def bundleResource = grailsResourceProcessor.findSyntheticResourceById(bundlename)
             if (!bundleResource) {
                 // Creates a new resource and empty file

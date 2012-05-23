@@ -8,7 +8,6 @@
         <version>1.6</version>
     </parent>
 
-
 	<groupId>nz.ac.auckland.grails.plugins</groupId>
 	<artifactId>resources</artifactId>
 	<packaging>grails-plugin</packaging>
@@ -35,6 +34,19 @@
             <version>[2,3)</version>
 						<scope>provided</scope>
         </dependency>
+				<dependency>
+						<groupId>org.grails.plugins</groupId>
+						<artifactId>spock</artifactId>
+						<version>0.6</version>
+						<type>grails-plugin</type>
+						<scope>test</scope>
+				</dependency>
+				<dependency>
+						<groupId>org.spockframework</groupId>
+						<artifactId>spock-grails-support</artifactId>
+						<version>0.6-groovy-1.8</version>
+						<scope>test</scope>
+				</dependency>
 </dependencies>
 	
 	<!-- without the plugin, it doesn't know how to cope with the grails-plugin artifact -->
