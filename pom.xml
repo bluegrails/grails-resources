@@ -12,7 +12,7 @@
   <groupId>nz.ac.auckland.grails.plugins</groupId>
   <artifactId>resources</artifactId>
   <packaging>grails-plugin</packaging>
-  <version>2.2-SNAPSHOT</version>
+  <version>2.2</version>
   <name>Reflects grails-resources plugin</name>
   <description>Grails resources plugin but with Maven bundling</description>
   <url>http://grails.org/plugin/resources</url>
