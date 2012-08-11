@@ -1,4 +1,4 @@
-package org.grails.plugin.resource.mapper
+package org.grails.plugin.resource
 
 import org.grails.plugin.resource.mapper.MapperPhase
 
@@ -18,8 +18,6 @@ class BaseUrlResourceMapper {
         if (config.enabled) {
 			def url
 
-            println "baseurl Config: $config"
-            
 			if (resource.module?.name && config.modules[resource.module.name]) {
 				url = config.modules[resource.module.name]
 			}

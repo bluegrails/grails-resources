@@ -6,3 +6,4 @@ target
 /test-tmp/
 /src/docs/ref/Resources/
 log
+grails-app/i18n/

@@ -23,7 +23,6 @@ import org.grails.plugin.resource.util.ResourceMetaStore
 import org.grails.plugin.resource.AggregatedResourceMeta
 
 import org.apache.commons.logging.LogFactory
-import javax.servlet.http.HttpServletResponse
 import org.springframework.core.io.Resource
 
 /**
@@ -201,7 +200,7 @@ class ResourceProcessor implements InitializingBean {
      * This involves looking it up by source uri. Therefore the same resource may have multiple mappings in the 
      * resourceInfo map but they should not be conflicting.
      */
-    boolean processLegacyResource(request, HttpServletResponse response) {
+    boolean processLegacyResource(request, response) {
         if (log.debugEnabled) {
             log.debug "Handling Legacy resource ${request.requestURI}"
         }
@@ -300,7 +299,9 @@ class ResourceProcessor implements InitializingBean {
         def uri = ResourceProcessor.removeQueryParams(extractURI(request, false))
         def inf
         try {
-            inf = getResourceMetaForURI(uri, false)
+            // Allow ad hoc creation of these resources too, incase they are requested directly 
+            // across multiple nodes, even if this node has not yet created a link to that resource
+            inf = getResourceMetaForURI(uri, true)
         } catch (FileNotFoundException fnfe) {
             response.sendError(404, fnfe.message)
             return
