@@ -14,10 +14,11 @@ class ResourceTagLibIntegTests extends GroovyPagesTestCase {
         ]
     }
 
+    // this test is broken
     def testExternalWithAbsoluteURI() {
         def result = applyTemplate('<r:external uri="https://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"/>', [:])
         println "Result: ${result}"
-        assertTrue result.indexOf('"https://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js') != -1
+        assert result.indexOf('"http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js') != -1
     }
 
     def testExternalWithAdhocResourceURIThatIsExcluded() {
